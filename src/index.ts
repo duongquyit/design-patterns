@@ -4,6 +4,8 @@ import { Engine } from './builder/engine';
 import { ICarBuilder } from './builder/interface/builder.interface';
 import { IPaymentService } from './factory/interfaces/payment.interface';
 import { PaymentFactory } from './factory/payment.factory';
+import { Circle } from './prototype/circle';
+import { ShapeClient } from './prototype/shape-client';
 
 const desginPatternExample = {
   factory: () => {
@@ -33,5 +35,15 @@ const desginPatternExample = {
     const suvCar = builder.build();
     suvCar.run();
     suvCar.getCarInfo();
+  },
+  prototype: () => {
+    const circle = new Circle('red', 40);
+
+    const clonePrototype = new ShapeClient(circle);
+
+    const cloneCircle = clonePrototype.createObject();
+
+    cloneCircle.draw();
   }
 };
+
