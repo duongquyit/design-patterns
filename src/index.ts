@@ -1,11 +1,11 @@
-import { CarBuilder } from './builder/car.builder';
-import { CarDirector } from './builder/car.director';
-import { Engine } from './builder/engine';
-import { ICarBuilder } from './builder/interface/builder.interface';
-import { IPaymentService } from './factory/interfaces/payment.interface';
-import { PaymentFactory } from './factory/payment.factory';
-import { Circle } from './prototype/circle';
-import { ShapeClient } from './prototype/shape-client';
+import { CarBuilder } from './creational-patterns/builder/car.builder';
+import { CarDirector } from './creational-patterns/builder/car.director';
+import { Engine } from './creational-patterns/builder/engine';
+import { ICarBuilder } from './creational-patterns/builder/interface/builder.interface';
+import { IPaymentService } from './creational-patterns/factory/interfaces/payment.interface';
+import { PaymentFactory } from './creational-patterns/factory/payment.factory';
+import { Circle } from './creational-patterns/prototype/circle';
+import { ShapeClient } from './creational-patterns/prototype/shape-client';
 
 const desginPatternExample = {
   factory: () => {
