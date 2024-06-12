@@ -7,6 +7,7 @@ import { PaymentFactory } from './creational-patterns/factory/payment.factory';
 import { Circle } from './creational-patterns/prototype/circle';
 import { ShapeClient } from './creational-patterns/prototype/shape-client';
 import { Database } from './creational-patterns/singleton/singleton';
+import { FormatAdapter } from './structural-patterns/adapter/convert';
 
 const desginPatternExample = {
   factory: () => {
@@ -52,5 +53,14 @@ const desginPatternExample = {
 
     const data = await connection.query('SELECT * FROM users');
   },
-};
+  adapter: () => {
+    const xml = "<foo attr=\"value\">bar</foo>";
 
+    const adapter = new FormatAdapter();
+    const jsonData = adapter.convertFromXMLToJSON(xml);
+    const xmlData = adapter.convertFromJSONToXML(jsonData);
+
+    console.log(jsonData);
+    console.log(xmlData);
+  }
+};
