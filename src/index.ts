@@ -6,6 +6,7 @@ import { IPaymentService } from './creational-patterns/factory/interfaces/paymen
 import { PaymentFactory } from './creational-patterns/factory/payment.factory';
 import { Circle } from './creational-patterns/prototype/circle';
 import { ShapeClient } from './creational-patterns/prototype/shape-client';
+import { Database } from './creational-patterns/singleton/singleton';
 
 const desginPatternExample = {
   factory: () => {
@@ -44,6 +45,12 @@ const desginPatternExample = {
     const cloneCircle = clonePrototype.createObject();
 
     cloneCircle.draw();
-  }
+  },
+  singleton: async () => {
+    const db = await Database.getDatabase();
+    const connection = await db.getConection();
+
+    const data = await connection.query('SELECT * FROM users');
+  },
 };
 
