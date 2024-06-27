@@ -8,6 +8,8 @@ import { Circle } from './creational-patterns/prototype/circle';
 import { ShapeClient } from './creational-patterns/prototype/shape-client';
 import { Database } from './creational-patterns/singleton/singleton';
 import { FormatAdapter } from './structural-patterns/adapter/convert';
+import { BasicChararater, Character } from './structural-patterns/bridge/character';
+import { Warrior } from './structural-patterns/bridge/clan';
 
 const desginPatternExample = {
   factory: () => {
@@ -62,5 +64,10 @@ const desginPatternExample = {
 
     console.log(jsonData);
     console.log(xmlData);
+  },
+  bridge: () => {
+    const warriorCharacter: Character = new BasicChararater('QND', 1, new Warrior());
+
+    console.log(warriorCharacter.getClan());
   }
 };
