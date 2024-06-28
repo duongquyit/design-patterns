@@ -12,6 +12,8 @@ import { BasicChararater, Character } from './structural-patterns/bridge/charact
 import { Warrior } from './structural-patterns/bridge/clan';
 import { ManagerComposite } from './structural-patterns/composite/composite';
 import { EmployeeLeaf } from './structural-patterns/composite/employee';
+import { BaseEmployee } from './structural-patterns/decorator/base-employee';
+import { Manager, TeamLead, TeamMember } from './structural-patterns/decorator/employee';
 
 const desginPatternExample = {
   factory: () => {
@@ -87,6 +89,16 @@ const desginPatternExample = {
     console.log('--------- After ----------------');
     manager.add([engineer1, engineer2, engineer3, engineer4, engineer5, engineer6]);
     manager.getDetails();
+  },
+  decorator: () => {
+    const employee = new BaseEmployee();
+
+    const teamMember = new TeamMember(employee);
+    const memberAndLeader = new TeamLead(teamMember);
+    const leaderAndManager = new Manager(memberAndLeader);
+
+    leaderAndManager.doTasks();
   }
 };
 
+desginPatternExample.decorator();
