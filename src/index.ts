@@ -14,6 +14,7 @@ import { ManagerComposite } from './structural-patterns/composite/composite';
 import { EmployeeLeaf } from './structural-patterns/composite/employee';
 import { BaseEmployee } from './structural-patterns/decorator/base-employee';
 import { Manager, TeamLead, TeamMember } from './structural-patterns/decorator/employee';
+import { ShopFacade } from './structural-patterns/facade/facade';
 
 const desginPatternExample = {
   factory: () => {
@@ -98,7 +99,13 @@ const desginPatternExample = {
     const leaderAndManager = new Manager(memberAndLeader);
 
     leaderAndManager.doTasks();
+  },
+  facade: () => {
+    const shopFacade = ShopFacade.getInstance();
+
+    shopFacade.buyProductByCashWithFreeShipping('email@gmail.com');
+    shopFacade.buyProductByPaypalWithStandardShipping('email@gmail.com', '0123321123');
   }
 };
 
-desginPatternExample.decorator();
+desginPatternExample.facade();
