@@ -10,6 +10,8 @@ import { Database } from './creational-patterns/singleton/singleton';
 import { FormatAdapter } from './structural-patterns/adapter/convert';
 import { BasicChararater, Character } from './structural-patterns/bridge/character';
 import { Warrior } from './structural-patterns/bridge/clan';
+import { ManagerComposite } from './structural-patterns/composite/composite';
+import { EmployeeLeaf } from './structural-patterns/composite/employee';
 
 const desginPatternExample = {
   factory: () => {
@@ -69,5 +71,22 @@ const desginPatternExample = {
     const warriorCharacter: Character = new BasicChararater('QND', 1, new Warrior());
 
     console.log(warriorCharacter.getClan());
+  },
+  composite: () => {
+    const engineer1 = new EmployeeLeaf('Quy', 'Backend Engineer');
+    const engineer2 = new EmployeeLeaf('Linh', 'Backend Engineer');
+    const engineer3 = new EmployeeLeaf('Thuan', 'Backend Engineer');
+    const engineer4 = new EmployeeLeaf('Phuc', 'Backend Engineer');
+    const engineer5 = new EmployeeLeaf('Nhat', 'Frontend Engineer');
+    const engineer6 = new EmployeeLeaf('Dat', 'Frontend Engineer');
+
+    const manager = new ManagerComposite();
+    console.log('--------- Before ----------------');
+    manager.getDetails();
+
+    console.log('--------- After ----------------');
+    manager.add([engineer1, engineer2, engineer3, engineer4, engineer5, engineer6]);
+    manager.getDetails();
   }
 };
+
