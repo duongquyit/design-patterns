@@ -1,3 +1,8 @@
+import {
+  CheckUserExistsHandle,
+  CheckUserPermissionHandler,
+  CheckUserRoleHandler
+} from './behavioral-patterns/chain-of-responsibility/request';
 import { CarBuilder } from './creational-patterns/builder/car.builder';
 import { CarDirector } from './creational-patterns/builder/car.director';
 import { Engine } from './creational-patterns/builder/engine';
@@ -105,7 +110,17 @@ const desginPatternExample = {
 
     shopFacade.buyProductByCashWithFreeShipping('email@gmail.com');
     shopFacade.buyProductByPaypalWithStandardShipping('email@gmail.com', '0123321123');
+  },
+  chainOfResponsibility: () => {
+    const checkUserRole = new CheckUserRoleHandler();
+    const checkUserPermission = new CheckUserPermissionHandler();
+    const checkUserExists = new CheckUserExistsHandle();
+
+    checkUserExists.setNextHandle(checkUserRole);
+    checkUserRole.setNextHandle(checkUserPermission);
+
+    checkUserExists.handle('');
   }
 };
 
-desginPatternExample.facade();
+desginPatternExample.chainOfResponsibility();
