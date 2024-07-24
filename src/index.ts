@@ -3,6 +3,9 @@ import {
   CheckUserPermissionHandler,
   CheckUserRoleHandler
 } from './behavioral-patterns/chain-of-responsibility/request';
+import { RedoCommand, UndoCommand, WriteCommand } from './behavioral-patterns/command/concrete-command';
+import { Document } from './behavioral-patterns/command/receiver';
+import { DocumentManager } from './behavioral-patterns/command/invoker';
 import { CarBuilder } from './creational-patterns/builder/car.builder';
 import { CarDirector } from './creational-patterns/builder/car.director';
 import { Engine } from './creational-patterns/builder/engine';
@@ -120,7 +123,29 @@ const desginPatternExample = {
     checkUserRole.setNextHandle(checkUserPermission);
 
     checkUserExists.handle('');
+  },
+  command: () => {
+    const document = new Document();
+    const writeCommand = new WriteCommand(document, 'Hello');
+    const undoCommand = new UndoCommand(document);
+    const redoCommand = new RedoCommand(document);
+    const documentManager = new DocumentManager();
+
+    documentManager.setCommand(writeCommand);
+    documentManager.executeCommand();
+
+    writeCommand.setText('World!');
+    documentManager.executeCommand();
+    console.log(document.getText());
+
+    documentManager.setCommand(undoCommand);
+    documentManager.executeCommand();
+    console.log(document.getText());
+
+    documentManager.setCommand(redoCommand);
+    documentManager.executeCommand();
+    console.log(document.getText());
   }
 };
 
-desginPatternExample.chainOfResponsibility();
+desginPatternExample.command();
