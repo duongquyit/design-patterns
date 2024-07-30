@@ -23,6 +23,8 @@ import { EmployeeLeaf } from './structural-patterns/composite/employee';
 import { BaseEmployee } from './structural-patterns/decorator/base-employee';
 import { Manager, TeamLead, TeamMember } from './structural-patterns/decorator/employee';
 import { ShopFacade } from './structural-patterns/facade/facade';
+import { Book } from './behavioral-patterns/iterator/book';
+import { BookCollection } from './behavioral-patterns/iterator/concrete.aggregate';
 
 const desginPatternExample = {
   factory: () => {
@@ -145,7 +147,25 @@ const desginPatternExample = {
     documentManager.setCommand(redoCommand);
     documentManager.executeCommand();
     console.log(document.getText());
+  },
+  iterator: () => {
+    // Client code
+    const book1 = new Book("The Great Gatsby");
+    const book2 = new Book("Moby Dick");
+    const book3 = new Book("1984");
+
+    const bookCollection = new BookCollection();
+    bookCollection.addBook(book1);
+    bookCollection.addBook(book2);
+    bookCollection.addBook(book3);
+
+    const iterator = bookCollection.createIterator();
+
+    while (iterator.hasNext()) {
+      const book = iterator.next();
+      console.log(book.getTitle());
+    }
   }
 };
 
-desginPatternExample.command();
+desginPatternExample.iterator();
