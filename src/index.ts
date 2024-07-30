@@ -25,6 +25,8 @@ import { Manager, TeamLead, TeamMember } from './structural-patterns/decorator/e
 import { ShopFacade } from './structural-patterns/facade/facade';
 import { Book } from './behavioral-patterns/iterator/book';
 import { BookCollection } from './behavioral-patterns/iterator/concrete.aggregate';
+import { User } from './behavioral-patterns/mediator/user';
+import { ChatRoom } from './behavioral-patterns/mediator/mediator.concrete';
 
 const desginPatternExample = {
   factory: () => {
@@ -165,7 +167,20 @@ const desginPatternExample = {
       const book = iterator.next();
       console.log(book.getTitle());
     }
+  },
+  mediator: () => {
+    const user1 = new User('1', 'John');
+    const user2 = new User('2', 'Tèo');
+    const user3 = new User('3', 'Tủn');
+
+    const chatRoom = new ChatRoom();
+
+    chatRoom.add(user1);
+    chatRoom.add(user2);
+    chatRoom.add(user3);
+
+    user1.sendMessage('Hello');
   }
 };
 
-desginPatternExample.iterator();
+desginPatternExample.mediator();
