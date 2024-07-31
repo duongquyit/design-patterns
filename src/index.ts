@@ -27,6 +27,8 @@ import { Book } from './behavioral-patterns/iterator/book';
 import { BookCollection } from './behavioral-patterns/iterator/concrete.aggregate';
 import { User } from './behavioral-patterns/mediator/user';
 import { ChatRoom } from './behavioral-patterns/mediator/mediator.concrete';
+import { Editor } from './behavioral-patterns/memento/memento.originator';
+import { Snapshot } from './behavioral-patterns/memento/memento.caretaker';
 
 const desginPatternExample = {
   factory: () => {
@@ -180,7 +182,17 @@ const desginPatternExample = {
     chatRoom.add(user3);
 
     user1.sendMessage('Hello');
+  },
+  memento: () => {
+    const editor = new Editor('Design');
+    const snapshot = new Snapshot(editor);
+
+    snapshot.makeSnapshot();
+    editor.write('pattern');
+    console.log(editor.getState());
+    snapshot.undo();
+    console.log(editor.getState());
   }
 };
 
-desginPatternExample.mediator();
+desginPatternExample.memento();
