@@ -29,6 +29,8 @@ import { User } from './behavioral-patterns/mediator/user';
 import { ChatRoom } from './behavioral-patterns/mediator/mediator.concrete';
 import { Editor } from './behavioral-patterns/memento/memento.originator';
 import { Snapshot } from './behavioral-patterns/memento/memento.caretaker';
+import { Subscriber } from './behavioral-patterns/observer/observer.concrete';
+import { Channel } from './behavioral-patterns/observer/subject.concrete';
 
 const desginPatternExample = {
   factory: () => {
@@ -192,7 +194,22 @@ const desginPatternExample = {
     console.log(editor.getState());
     snapshot.undo();
     console.log(editor.getState());
+  },
+  observer: () => {
+    const subscriber1 = new Subscriber();
+    const subscriber2 = new Subscriber();
+    const subscriber3 = new Subscriber();
+    const musicChannel = new Channel();
+
+    subscriber1.subscribe(musicChannel);
+    subscriber2.subscribe(musicChannel);
+    musicChannel.setNews('Không thể say - hieuthuhai');
+
+    const gameChannel = new Channel();
+    subscriber1.subscribe(gameChannel);
+    subscriber3.subscribe(gameChannel);
+    gameChannel.setNews('League of Legends');
   }
 };
 
-desginPatternExample.memento();
+desginPatternExample.observer();
