@@ -32,6 +32,8 @@ import { Snapshot } from './behavioral-patterns/memento/memento.caretaker';
 import { Subscriber } from './behavioral-patterns/observer/observer.concrete';
 import { Channel } from './behavioral-patterns/observer/subject.concrete';
 import { VendingMachine } from './behavioral-patterns/state/state.context';
+import { CreditCard, GooglePay, Paypal } from './behavioral-patterns/strategy/strategy.concrete';
+import { ShoppingCart } from './behavioral-patterns/strategy/strategy.context';
 
 const desginPatternExample = {
   factory: () => {
@@ -217,7 +219,21 @@ const desginPatternExample = {
     vendingMachine.select();
     vendingMachine.insert();
     vendingMachine.select();
+  },
+  strategy: () => {
+    // NOTE: Can use factory pattern to create a payment method, it's depend on input and use the payment method into as algorithm in strategy
+    const creditCard = new CreditCard('John', '123321123', '123', '20260801');
+    const paypal = new Paypal('DOE');
+    const googlePay = new GooglePay('noemail@example.com', '1');
+    const cart = new ShoppingCart();
+
+    cart.addItem({ name: 'Book', price: 100 });
+    cart.addItem({ name: 'Pen', price: 20 });
+
+    cart.pay(creditCard);
+    cart.pay(paypal);
+    cart.pay(googlePay);
   }
 };
 
-desginPatternExample.state();
+desginPatternExample.strategy();
