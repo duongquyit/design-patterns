@@ -31,6 +31,7 @@ import { Editor } from './behavioral-patterns/memento/memento.originator';
 import { Snapshot } from './behavioral-patterns/memento/memento.caretaker';
 import { Subscriber } from './behavioral-patterns/observer/observer.concrete';
 import { Channel } from './behavioral-patterns/observer/subject.concrete';
+import { VendingMachine } from './behavioral-patterns/state/state.context';
 
 const desginPatternExample = {
   factory: () => {
@@ -209,7 +210,14 @@ const desginPatternExample = {
     subscriber1.subscribe(gameChannel);
     subscriber3.subscribe(gameChannel);
     gameChannel.setNews('League of Legends');
+  },
+  state: () => {
+    const vendingMachine = new VendingMachine();
+
+    vendingMachine.select();
+    vendingMachine.insert();
+    vendingMachine.select();
   }
 };
 
-desginPatternExample.observer();
+desginPatternExample.state();
